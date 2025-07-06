@@ -1,0 +1,162 @@
+/* 
+.listings {
+    text-decoration: none;
+    font-family: Verdana;
+    color: rgb(165, 42, 42);
+}
+.host{
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(238, 238, 238);
+    padding: 7px;
+    border-radius: 16px;
+    font-size: bold;
+    color: black;
+}
+.host:hover{
+    background-color: rgb(222, 221, 221);
+}
+a{
+    text-decoration: none;
+    font-family: Verdana;
+    background-color: rgb(236, 236, 236);
+    padding: 10px;
+    margin: 20px;
+    border-radius: 12px;
+    color: black;
+}
+a:hover{
+    background-color: rgb(213, 213, 213);
+} */
+
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+/* Navbar */
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+    opacity: 1;
+}
+.fa-person-walking-luggage{
+    color: #FF5A5F;
+}
+.fa-person-walking-luggage:hover{
+    color: rgb(80, 205, 247) ;
+}
+.nav-link{
+    color: #222222 !important;
+     border-radius: 15px;
+}
+.nav-link:hover{
+    background-color: rgb(240, 235, 235);
+   
+}
+.f-info{
+    
+    background-color: #ebebeb;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.fa-globe{
+    font-size: 1.1rem;
+}
+.f-info-socials, .f-info-company, .f-info-ptc{
+    font-family: Verdana;
+    font-size: 1rem;
+}
+.fa-brands{
+    font-size: 1.3rem;
+}
+.fa-copyright{
+    font-size: 1.2rem;
+}
+.ptc{
+    text-decoration: none;
+    color: rgb(95, 94, 94) ;
+}
+.ptc:hover{
+    color: black;
+    text-decoration: underline;
+}
+
+/* Card */
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text {
+    font-weight: 400 !important;
+}
+.listlink{
+    text-decoration: none;
+}
+
+/* Card Effect */
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.4;
+    background-color: white;
+}
+
+    /* New Page */
+.add-btn{
+    background-color: #FF5A5F !important ;
+    border: none !important;
+}
+.add-btn:hover{
+    background-color:  #f43a40 !important;
+}
+
+/* Show page */
+
+.show-img{
+    height: 30vh;
+    width: 100vh;
+}
+
+.btns{
+    display: flex;
+}
+
+.review-card{
+    border: solid 1px black !important;
+    margin-right: 1rem;
+    width: 25rem !important;
+}
+
+/* Map */
+
+#map {
+    height: 400px;
+    width: 80vh;
+    border-radius: 14px;
+ }
