@@ -98,7 +98,7 @@ body {
 
 @media(min-width: 1000px ){
     body{
-        visibility: hidden;
+        visibility: hidden !important;
     }
 }
 
