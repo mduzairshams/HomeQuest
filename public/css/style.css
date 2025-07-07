@@ -96,7 +96,7 @@ body {
     text-decoration: underline;
 }
 
-@media(min-width: 1000px ) and (max-width: 1300){
+@media(min-width: 1000px ) and (max-width: 1300px){
     body{
         background-color: red;
         color: red;
