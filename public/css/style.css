@@ -96,6 +96,13 @@ body {
     text-decoration: underline;
 }
 
+@media(min-width: 1000px ) and (max-width: 1300){
+    body{
+        background-color: red;
+        color: red;
+    }
+}
+
 /* Card */
 
 .card{
