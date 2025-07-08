@@ -1,27 +1,34 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
-    .filters{
+    .filters-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
         margin-top: 1rem;
+    }
+    .filters-row {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        gap: 1rem;
     }
-    .filter{
+    .filter {
         text-align: center;
         margin-right: 2rem;
         font-size: 0.9rem;
         opacity: 0.7;
-        
     }
-    .filter:hover{
+    .filter:hover {
         opacity: 1;
-        cursor:pointer
+        cursor: pointer;
     }
-    .taxInfo{
+    .taxInfo {
         display: none;
     }
-    .taxSwitch{
+    .taxSwitch {
         border-radius: 14px;
         border: solid 1px black;
         padding: 10px;
@@ -29,15 +36,68 @@
         height: 3rem;
         align-items: center;
         margin-left: 3rem;
+        white-space: nowrap;
     }
-
+    .filters-dropdown {
+        display: none;
+        position: relative;
+    }
+    .filters-dropdown-btn {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .filters-dropdown-content {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 110%;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        min-width: 220px;
+        z-index: 10;
+        flex-direction: column;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .filters-dropdown.open .filters-dropdown-content {
+        display: flex;
+    }
+    @media (max-width: 1399px) {
+        .filters-row {
+            display: none;
+        }
+        .filters-dropdown {
+            display: block;
+        }
+        .taxSwitch {
+            margin-left: 1rem;
+        }
+        .filters-container {
+            flex-wrap: nowrap;
+        }
+    }
+    @media (min-width: 1400px) {
+        .filters-row {
+            display: flex;
+        }
+        .filters-dropdown {
+            display: none;
+        }
+    }
 </style>
 
-    <div class="filters">
-        <div class="filter = ">
-            <i class="fa-solid fa-fire "></i>
-            <div class="label  " >Trending </div>
-            
+<div class="filters-container">
+    <div class="filters-row">
+        <div class="filter">
+            <i class="fa-solid fa-fire"></i>
+            <div class="label">Trending</div>
         </div>
         <div class="filter">
             <i class="fa-solid fa-bed"></i>
@@ -50,7 +110,8 @@
         <div class="filter">
             <i class="fa-solid fa-city"></i>
             <div class="label">Iconic cities</div>
-        </div><div class="filter">
+        </div>
+        <div class="filter">
             <i class="fa-solid fa-umbrella-beach"></i>
             <div class="label">Beach</div>
         </div>
@@ -62,7 +123,7 @@
             <i class="fa-solid fa-shuttle-space"></i>
             <div class="label">OMG! </div>
         </div>
-         <div class="filter">
+        <div class="filter">
             <i class="fa-solid fa-ship"></i>
             <div class="label">Boats</div>
         </div>
@@ -78,46 +139,84 @@
             <i class="fa-solid fa-crown"></i>
             <div class="label">Luxury</div>
         </div>
-       
         <div class="taxSwitch">
-        <div class="form-check form-switch form-check-reverse">
-            <input class="form-check-input switch" type="checkbox" id="switchCheckReverse">
-            <label class="form-check-label switch" for="switchCheckReverse">Display price inclusive of taxes</label>
+            <div class="form-check form-switch form-check-reverse">
+                <input class="form-check-input switch" type="checkbox" id="switchCheckReverse">
+                <label class="form-check-label switch" for="switchCheckReverse">Display price inclusive of taxes</label>
+            </div>
         </div>
-       </div>
     </div>
-    
-
-    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 mt-3">
-        <%for(list of allListings){%>
-            <a class="listlink" href="/listings/<%= list._id %>"> 
-                <div class="card col" >
-                    <img src="<%= list.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem;">
-                    <div class="card-img-overlay"><%=list.description%></div>
-                    <div class="card-body">
-                        <h4> <b><%= list.title %></b></h4>
-                        <p class="card-text "> &#8377; <%=list.price.toLocaleString("en-IN") %> /night <i class="taxInfo">&nbsp; +18%GST</i> </p>
-                    </div>
+    <div class="filters-dropdown">
+        <button class="filters-dropdown-btn" id="filtersDropdownBtn">
+            <i class="fa-solid fa-sliders"></i> Filters
+        </button>
+        <div class="filters-dropdown-content" id="filtersDropdownContent">
+            <div class="filter filter-dropdown"><i class="fa-solid fa-fire"></i><span class="label">Trending</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-bed"></i><span class="label">Rooms</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-mountain-sun"></i><span class="label">Amazing views</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-city"></i><span class="label">Iconic cities</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-umbrella-beach"></i><span class="label">Beach</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-mountain"></i><span class="label">Mountains</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-shuttle-space"></i><span class="label">OMG! </span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-ship"></i><span class="label">Boats</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-campground"></i><span class="label">Camp</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-igloo"></i><span class="label">Domes</span></div>
+            <div class="filter filter-dropdown"><i class="fa-solid fa-crown"></i><span class="label">Luxury</span></div>
+            <div class="taxSwitch taxSwitch-dropdown">
+                <div class="form-check form-switch form-check-reverse">
+                    <input class="form-check-input switch" type="checkbox" id="switchCheckReverseDropdown">
+                    <label class="form-check-label switch" for="switchCheckReverseDropdown">Display price inclusive of taxes</label>
                 </div>
-            </a>
-        <%}%>
+            </div>
+        </div>
     </div>
+</div>
 
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <%for(list of allListings){%>
+        <a class="listlink" href="/listings/<%= list._id %>"> 
+            <div class="card col" >
+                <img src="<%= list.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+                <div class="card-img-overlay"><%=list.description%></div>
+                <div class="card-body">
+                    <h4> <b><%= list.title %></b></h4>
+                    <p class="card-text "> &#8377; <%=list.price.toLocaleString("en-IN") %> /night <i class="taxInfo">&nbsp; +18%GST</i> </p>
+                </div>
+            </div>
+        </a>
+    <%}%>
+</div>
 
 <script>
+    // Dropdown toggle for filters
+    const filtersDropdownBtn = document.getElementById('filtersDropdownBtn');
+    const filtersDropdownContent = document.getElementById('filtersDropdownContent');
+    if (filtersDropdownBtn) {
+        filtersDropdownBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.parentElement.classList.toggle('open');
+        });
+        document.addEventListener('click', function(e) {
+            if (!filtersDropdownContent.contains(e.target) && !filtersDropdownBtn.contains(e.target)) {
+                filtersDropdownBtn.parentElement.classList.remove('open');
+            }
+        });
+    }
+    // Taxes toggle for both main and dropdown
     let taxSwitch = document.getElementById("switchCheckReverse")
-    taxSwitch.addEventListener("click", () => {
+    let taxSwitchDropdown = document.getElementById("switchCheckReverseDropdown")
+    function toggleTaxInfo() {
         let taxInfo = document.getElementsByClassName("taxInfo")
         for(info of taxInfo){
             if(info.style.display !== "inline"){
                 info.style.display = "inline"
             }else{
                 info.style.display = "none"
-                
             }
         }
-        console.log(taxInfo)
-    })
+    }
+    if (taxSwitch) taxSwitch.addEventListener("click", toggleTaxInfo)
+    if (taxSwitchDropdown) taxSwitchDropdown.addEventListener("click", toggleTaxInfo)
 </script>
     
 

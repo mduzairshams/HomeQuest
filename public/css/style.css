@@ -30,6 +30,16 @@ a:hover{
 } */
 
 
+/*
+body {
+  background: linear-gradient(135deg, #111 0%, #222 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+*/
+
 /* body {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-style: normal;
@@ -163,4 +173,165 @@ a:hover{
     height: 400px;
     width: 80vh;
     border-radius: 14px;
- } 
+ }
+
+/* Responsive filter tweaks for dropdown and row */
+.filters-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.filters-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.filter {
+    text-align: center;
+    margin-right: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.taxSwitch {
+    margin-left: 0;
+    margin-top: 0;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: #fff;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.2s;
+}
+.taxSwitch:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.filters-dropdown {
+    display: none;
+    position: relative;
+}
+.filters-dropdown-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.filters-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 110%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-width: 220px;
+    z-index: 10;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.filters-dropdown.open .filters-dropdown-content {
+    display: flex;
+}
+.filter-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    padding: 0.5rem 1.25rem;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+.filter-dropdown:last-child {
+    border-bottom: none;
+}
+.filters-dropdown-content {
+    padding: 0.5rem 0;
+}
+.taxSwitch-dropdown {
+    margin: 0.5rem 1.25rem 0.5rem 1.25rem;
+    border: none;
+    border-top: 1px solid #eee;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+    height: auto;
+}
+@media (max-width: 1399px) {
+    .filters-row {
+        display: none;
+    }
+    .filters-dropdown {
+        display: block;
+    }
+    .taxSwitch {
+        margin-left: 1rem;
+    }
+    .filters-container {
+        flex-wrap: nowrap;
+    }
+}
+@media (min-width: 1400px) {
+    .filters-row {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: 100%;
+        gap: 2rem;
+    }
+    .taxSwitch {
+        margin-left: 0;
+        margin-top: 0;
+        flex-shrink: 0;
+    }
+    .filters-container {
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+}
+@media (max-width: 767px) {
+  .search-btn-text {
+    display: none !important;
+  }
+  .search-inp::placeholder {
+    font-size: 1rem;
+  }
+  .search-btn {
+    border-radius: 50% !important;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .search-btn i {
+    margin: 0 !important;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+} 

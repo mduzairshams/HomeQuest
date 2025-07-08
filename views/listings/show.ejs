@@ -9,7 +9,11 @@
             <div class="card col-8">
                 <img src="<%= listing.image.url %>" class="card-img-top show-img mb-3" alt="Listing_image">
                 <div class="card-body">
-                    <p class="card-text">Owned by <i><%= listing.owner.username  %></i></p>
+                    <% if (listing.owner && listing.owner.username) { %>
+                    <p class="card-text">Owned by <i><%= listing.owner.username %></i></p>
+                    <% } else { %>
+                    <p class="card-text">Owned by <i>Unknown</i></p>
+                    <% } %>
                     <p class="card-text"><%= listing.description %></p>
                     <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
                     <p class="card-text"><%= listing.location %></p>

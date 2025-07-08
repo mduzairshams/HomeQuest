@@ -39,11 +39,11 @@
         <nav class="navbar bg-body-light">
           <div class="container-fluid">
             <form class="d-flex" role="search">
-              <input class="form-control me-2 search-inp" type="search" placeholder="Search destination"/>
-                <button class="btn search-btn" type="submit">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  &nbsp;&nbsp;Search
-                </button>
+              <input class="form-control me-2 search-inp" id="mainSearchInput" type="search" placeholder="Search destination"/>
+              <button class="btn search-btn" id="mainSearchBtn" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-btn-text">&nbsp;&nbsp;Search</span>
+              </button>
             </form>
           </div>
         </nav>
@@ -61,4 +61,21 @@
     </div>
   </div>
 </nav>
+
+<script>
+  function updateSearchBarResponsive() {
+    const width = window.innerWidth;
+    const input = document.getElementById('mainSearchInput');
+    const btnText = document.querySelector('.search-btn-text');
+    if (width < 768) {
+      if (input) input.placeholder = 'Search';
+      if (btnText) btnText.style.display = 'none';
+    } else {
+      if (input) input.placeholder = 'Search destination';
+      if (btnText) btnText.style.display = 'inline';
+    }
+  }
+  window.addEventListener('resize', updateSearchBarResponsive);
+  window.addEventListener('DOMContentLoaded', updateSearchBarResponsive);
+</script>
 
