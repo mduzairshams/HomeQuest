@@ -14,18 +14,430 @@
   .search-btn i {
     display: inline;
     margin-left: 0.5rem;
-
   }
-
   .search-inp{
     border-radius: 25px;
     padding: 0.5rem 3rem 0.5rem 3rem;
   }
-
-
+  /* Sticky bottom navbar for mobile */
+  .mobile-bottom-nav {
+    display: none;
+  }
+  @media (max-width: 991.98px) {
+    .desktop-navbar { display: none !important; }
+    .mobile-bottom-nav {
+      display: flex !important;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      z-index: 1050;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.2rem 1.2rem 0.2rem 1.2rem;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+    }
+    .mobile-bottom-nav .center-logo {
+      font-size: 2rem;
+      color: #FF5A5F;
+      background: #fff;
+      border-radius: 50%;
+      padding: 0.2rem 0.7rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin: 0 0.5rem;
+    }
+    .mobile-bottom-nav .nav-btn {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.5rem;
+    }
+    .mobile-bottom-nav .profile-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .mobile-bottom-nav .profile-dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      bottom: 2.2rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      min-width: 120px;
+      z-index: 1100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 0.5rem 0.5rem;
+      text-align: left;
+    }
+    .mobile-bottom-nav .profile-dropdown-content a {
+      display: block;
+      margin: 0.3rem 0;
+      font-size: 1rem;
+      color: #222;
+      text-decoration: none;
+    }
+    .mobile-bottom-nav .profile-dropdown-content a:hover {
+      color: #FF5A5F;
+    }
+    .mobile-bottom-nav .profile-dropdown.open .profile-dropdown-content {
+      display: block;
+    }
+    /* Sticky top search bar for mobile */
+    .mobile-top-search {
+      display: flex !important;
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: #fff;
+      z-index: 1040;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+      border-bottom: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: top 0.3s;
+    }
+  }
+  @media (max-width: 759.98px) {
+    .mobile-bottom-nav .nav-btn .nav-text {
+      display: none !important;
+    }
+    .mobile-bottom-nav .explore-icon {
+      display: none !important;
+    }
+    .mobile-bottom-nav .home-icon {
+      display: inline !important;
+    }
+  }
+  .mobile-bottom-nav .home-icon {
+    display: none;
+  }
+  .mobile-bottom-nav .nav-btn,
+  .mobile-bottom-nav .nav-btn:visited,
+  .mobile-bottom-nav .nav-btn:active,
+  .mobile-bottom-nav .nav-btn:focus {
+    text-decoration: none !important;
+    color: inherit;
+  }
+  .mobile-bottom-nav .nav-btn:hover {
+    text-decoration: none !important;
+    color: #FF5A5F;
+  }
+  .navbar-nav.ms-auto.Adrop .nav-link {
+    text-decoration: none !important;
+    color: #222;
+    margin-left: 0.5rem;
+    font-weight: 500;
+    border: none;
+    background: none;
+    transition: color 0.18s, border 0.18s;
+  }
+  .navbar-nav.ms-auto.Adrop .nav-link, .navbar-nav.ms-auto.Adrop .nav-link.signup-btn, .navbar-nav.ms-auto.Adrop .nav-link.login-btn {
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    font-size: 1.08rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: baseline;
+    text-align: center;
+  }
+  .navbar-nav.ms-auto.Adrop .nav-link.signup-btn {
+    color: #4267B2;
+    border: 1.5px solid #4267B2;
+    border-radius: 8px;
+    padding: 0.2rem 1.1rem;
+    background: #fff;
+    font-weight: 500;
+    margin-left: 0.7rem;
+    transition: background 0.18s, color 0.18s;
+    height: 38px;
+    min-width: 90px;
+  }
+  .navbar-nav.ms-auto.Adrop .nav-link.signup-btn:hover {
+    background: #f5f8ff;
+    color: #274a8a;
+    border-color: #274a8a;
+    text-decoration: none;
+  }
+  .navbar-nav.ms-auto.Adrop .nav-link.login-btn {
+    color: #222;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0.2rem 0.7rem;
+    margin-left: 0.2rem;
+    transition: color 0.18s;
+    height: 38px;
+  }
+  .navbar-nav.ms-auto.Adrop .nav-link.login-btn:hover {
+    color: #FF5A5F;
+    text-decoration: none;
+  }
+  /* Modern search bar enhancements */
+  .modern-search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    position: relative;
+  }
+  .modern-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1.5px 8px rgba(0,0,0,0.04);
+    border-radius: 2rem;
+    padding: 0.15rem 0.5rem 0.15rem 1.2rem;
+    backdrop-filter: blur(8px);
+    transition: box-shadow 0.22s, background 0.22s, border 0.22s;
+    border: 2px solid transparent;
+  }
+  .modern-search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    font-size: 1.08rem;
+    flex: 1 1 auto;
+    padding: 0.7rem 2.5rem 0.7rem 0.2rem;
+    border-radius: 2rem;
+    color: #222;
+  }
+  .modern-search-input:focus {
+    background: rgba(255,255,255,0.95);
+  }
+  .modern-search-wrapper:focus-within {
+    border: 2.5px solid #FF5A5F;
+    box-shadow: 0 6px 24px rgba(255,90,95,0.13);
+  }
+  .clear-search-btn {
+    position: absolute;
+    right: 2.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: #888;
+    cursor: pointer;
+    z-index: 2;
+    padding: 0 0.3rem;
+    border-radius: 50%;
+    transition: background 0.18s;
+    outline: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .clear-search-btn:hover, .clear-search-btn:focus {
+    background: #f2f2f2;
+    color: #FF5A5F;
+  }
+  .search-icon-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.18s cubic-bezier(.4,2,.6,1);
+    color: #FF5A5F;
+    font-size: 1.2rem;
+    z-index: 1;
+  }
+  .search-icon-wrapper.animated {
+    transform: translateY(-50%) scale(1.18) rotate(-10deg);
+  }
+  .modern-search-btn {
+    border-radius: 2rem;
+    padding: 0.5rem 1.2rem;
+    background: #FF5A5F;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border: none;
+    font-size: 1.08rem;
+    font-weight: 500;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 2px 8px rgba(255,90,95,0.08);
+    margin-left: 0.5rem;
+  }
+  .modern-search-btn:hover, .modern-search-btn:focus {
+    background: #fe3b41;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,90,95,0.13);
+  }
+  .live-search-results {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    z-index: 100;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+  }
+  .live-search-item {
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    color: #222;
+    font-size: 1.05rem;
+    border-bottom: 1px solid #f3f3f3;
+    transition: background 0.15s;
+  }
+  .live-search-item:last-child {
+    border-bottom: none;
+  }
+  .live-search-item:hover, .live-search-item.active {
+    background: #f7f7f7;
+    color: #FF5A5F;
+  }
+  @media (max-width: 991.98px) {
+    .modern-search-wrapper {
+      max-width: 100vw;
+      padding: 0.1rem 0.3rem 0.1rem 1rem;
+    }
+    .modern-search-input {
+      font-size: 1rem;
+      padding: 0.6rem 2.2rem 0.6rem 0.2rem;
+    }
+    .modern-search-btn {
+      padding: 0.5rem 0.9rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .modern-search-wrapper {
+      max-width: 100vw;
+      padding: 0.1rem 0.1rem 0.1rem 0.7rem;
+      border-radius: 1.5rem;
+    }
+    .modern-search-input {
+      font-size: 0.98rem;
+      padding: 0.5rem 2rem 0.5rem 0.1rem;
+    }
+    .modern-search-btn {
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      min-width: 42px;
+      justify-content: center;
+    }
+    .search-btn-text {
+      display: none !important;
+    }
+    .clear-search-btn {
+      right: 2.7rem;
+      font-size: 1.1rem;
+    }
+  }
+  /* Hide browser default clear/cancel button for all browsers */
+  .modern-search-input::-webkit-search-clear-button,
+  .modern-search-input::-webkit-search-cancel-button,
+  .modern-search-input::-ms-clear,
+  .modern-search-input::-ms-reveal {
+    display: none !important;
+    width: 0;
+    height: 0;
+  }
+  .modern-search-input[type="search"]::-webkit-search-decoration,
+  .modern-search-input[type="search"]::-webkit-search-results-decoration {
+    display: none !important;
+  }
+  .modern-search-input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  }
+  .modern-search-btn .btn-search-icon {
+    display: none;
+  }
+  @media (max-width: 770px) {
+    .modern-search-form {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    .modern-search-wrapper {
+      display: flex !important;
+      align-items: center !important;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .modern-search-input {
+      height: 48px;
+      font-size: 1rem;
+    }
+    .modern-search-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      padding: 0;
+      line-height: 1;
+      margin: 0;
+    }
+    .modern-search-btn .search-btn-text,
+    .modern-search-btn .search-btn-text-desktop {
+      display: none !important;
+    }
+    .modern-search-btn .btn-search-icon {
+      display: flex !important;
+      position: static;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      color: #fff !important;
+      font-size: 1.7rem;
+      width: 100%;
+      height: 100%;
+      line-height: 1;
+    }
+    .modern-search-btn .fa-magnifying-glass {
+      margin: 2.9rem 0 0 0 !important;
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Hide search icon in input under 770px */
+    .mobile-top-search .modern-search-wrapper .input-search-icon,
+    .desktop-navbar .modern-search-wrapper .input-search-icon {
+      display: none !important;
+    }
+  }
 </style>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<!-- Desktop Navbar -->
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top desktop-navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><i class="icon fa-solid fa-person-walking-luggage fa-xl"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
@@ -38,12 +450,17 @@
       <div class="navbar-nav search border-bottom ms-auto">
         <nav class="navbar bg-body-light">
           <div class="container-fluid">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2 search-inp" id="mainSearchInput" type="search" placeholder="Search destination"/>
-              <button class="btn search-btn" id="mainSearchBtn" type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span class="search-btn-text">&nbsp;&nbsp;Search</span>
+            <form class="modern-search-form position-relative" role="search" method="GET" action="/listings" autocomplete="off">
+              <div class="modern-search-wrapper">
+                <input class="modern-search-input" id="mainSearchInput" name="search" type="text" placeholder="Search destination, title, or place" value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>" aria-label="Search" autocomplete="off"/>
+                <span class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search" style="display:none;" tabindex="0">&times;</span>
+                <span class="search-icon-wrapper input-search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+              </div>
+              <button class="modern-search-btn" id="mainSearchBtn" type="submit" aria-label="Submit search">
+                <span class="search-icon-wrapper btn-search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <span class="search-btn-text search-btn-text-desktop">Search</span>
               </button>
+              <div id="liveSearchResults" class="live-search-results" style="display:none;"></div>
             </form>
           </div>
         </nav>
@@ -51,18 +468,61 @@
       <div class="navbar-nav ms-auto Adrop">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <% if(!currUser){%>
-        <a class="nav-link " aria-current="page" href="/signup"><b>Signup</b></a>
-        <a class="nav-link" href="/login"><b>Login</b></a>
+        <a class="nav-link login-btn" href="/login">Log in</a>
+        <a class="nav-link signup-btn" href="/signup">Sign up</a>
         <%}else{%>
         <a class="nav-link" href="/logout"><b>Logout</b></a>
         <%}%>
-       
       </div>
     </div>
   </div>
 </nav>
 
+<!-- Mobile Top Search Bar -->
+<div class="mobile-top-search" style="display:none;">
+  <form class="modern-search-form position-relative" role="search" method="GET" action="/listings" autocomplete="off">
+    <div class="modern-search-wrapper">
+      <input class="modern-search-input" id="mobileSearchInput" name="search" type="text" placeholder="Search destination, title, or place" aria-label="Search" autocomplete="off"/>
+      <span class="clear-search-btn" id="mobileClearSearchBtn" aria-label="Clear search" style="display:none;" tabindex="0">&times;</span>
+      <span class="search-icon-wrapper input-search-icon" id="mobileSearchIcon"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+    <button class="modern-search-btn" id="mobileMainSearchBtn" type="submit" aria-label="Submit search">
+      <span class="search-icon-wrapper btn-search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <span class="search-btn-text">Search</span>
+    </button>
+    <div id="mobileLiveSearchResults" class="live-search-results" style="display:none;"></div>
+  </form>
+</div>
+
+<!-- Mobile Sticky Bottom Navbar -->
+<div class="mobile-bottom-nav" style="display:none;">
+  <a href="/listings" class="nav-btn">
+    <i class="fa-solid fa-compass explore-icon"></i>
+    <i class="fa-solid fa-house home-icon"></i>
+    <span class="nav-text">Explore</span>
+  </a>
+  <a href="#" class="center-logo"><i class="fa-solid fa-person-walking-luggage"></i></a>
+  <div style="display:flex;align-items:center;gap:0.2rem;">
+    <a href="/listings/new" class="nav-btn">
+      <i class="fa-solid fa-plus"></i>
+      <span class="nav-text">Airbnb your home</span>
+    </a>
+    <div class="profile-dropdown" id="profileDropdown">
+      <button class="nav-btn" onclick="toggleProfileDropdown(event)"><i class="fa-solid fa-user-circle"></i></button>
+      <div class="profile-dropdown-content">
+        <% if(!currUser){%>
+          <a href="/signup">Signup</a>
+          <a href="/login">Login</a>
+        <%}else{%>
+          <a href="/logout">Logout</a>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+  // Responsive search bar placeholder
   function updateSearchBarResponsive() {
     const width = window.innerWidth;
     const input = document.getElementById('mainSearchInput');
@@ -77,5 +537,87 @@
   }
   window.addEventListener('resize', updateSearchBarResponsive);
   window.addEventListener('DOMContentLoaded', updateSearchBarResponsive);
+
+  // Show/hide mobile nav and search bar
+  function handleMobileNav() {
+    const width = window.innerWidth;
+    const mobileNav = document.querySelector('.mobile-bottom-nav');
+    const mobileSearch = document.querySelector('.mobile-top-search');
+    if (width <= 991.98) {
+      if (mobileNav) mobileNav.style.display = 'flex';
+      if (mobileSearch) mobileSearch.style.display = 'flex';
+    } else {
+      if (mobileNav) mobileNav.style.display = 'none';
+      if (mobileSearch) mobileSearch.style.display = 'none';
+    }
+  }
+  window.addEventListener('resize', handleMobileNav);
+  window.addEventListener('DOMContentLoaded', handleMobileNav);
+
+  // Sticky top search bar hides on scroll down
+  let lastScrollTop = 0;
+  window.addEventListener('scroll', function() {
+    const mobileSearch = document.querySelector('.mobile-top-search');
+    if (!mobileSearch || window.innerWidth > 991.98) return;
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+    if (st > 40) {
+      mobileSearch.style.top = '-60px';
+    } else {
+      mobileSearch.style.top = '0';
+    }
+    lastScrollTop = st <= 0 ? 0 : st;
+  }, false);
+
+  // Profile dropdown toggle
+  function toggleProfileDropdown(e) {
+    e.preventDefault();
+    const dropdown = document.getElementById('profileDropdown');
+    dropdown.classList.toggle('open');
+  }
+  // Close profile dropdown if clicked outside
+  document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('profileDropdown');
+    if (!dropdown) return;
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
+
+  // Modern search bar enhancements
+  function updateClearBtnVisibility() {
+    const input = document.getElementById('mainSearchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    if (input && clearBtn) {
+      clearBtn.style.display = input.value.length > 0 ? 'flex' : 'none';
+    }
+  }
+  const mainSearchInput = document.getElementById('mainSearchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  if (mainSearchInput && clearSearchBtn) {
+    mainSearchInput.addEventListener('input', updateClearBtnVisibility);
+    clearSearchBtn.addEventListener('click', function() {
+      mainSearchInput.value = '';
+      updateClearBtnVisibility();
+      mainSearchInput.focus();
+    });
+    clearSearchBtn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        mainSearchInput.value = '';
+        updateClearBtnVisibility();
+        mainSearchInput.focus();
+      }
+    });
+    updateClearBtnVisibility();
+  }
+  // Animate search icon on focus/blur
+  const searchIconWrapper = document.querySelector('.search-icon-wrapper');
+  if (mainSearchInput && searchIconWrapper) {
+    mainSearchInput.addEventListener('focus', function() {
+      searchIconWrapper.classList.add('animated');
+    });
+    mainSearchInput.addEventListener('blur', function() {
+      searchIconWrapper.classList.remove('animated');
+    });
+  }
 </script>
 

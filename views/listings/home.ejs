@@ -6,27 +6,9 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         margin-top: 1rem;
-    }
-    .filters-row {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 1rem;
-    }
-    .filter {
-        text-align: center;
-        margin-right: 2rem;
-        font-size: 0.9rem;
-        opacity: 0.7;
-    }
-    .filter:hover {
-        opacity: 1;
-        cursor: pointer;
-    }
-    .taxInfo {
-        display: none;
+        gap: 0.5rem;
     }
     .taxSwitch {
         border-radius: 14px;
@@ -35,8 +17,79 @@
         display: flex;
         height: 3rem;
         align-items: center;
-        margin-left: 3rem;
+        margin-left: 0;
+        margin-right: 1rem;
         white-space: nowrap;
+        min-width: 180px;
+        background: #fff;
+    }
+    .filter-carousel-wrapper {
+        position: relative;
+        flex: 1 1 auto;
+        max-width: 100vw;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+    .filter-carousel {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+        will-change: transform;
+        gap: 0.2rem;
+    }
+    .filter {
+        text-align: center;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        text-decoration: none !important;
+        color: inherit !important;
+        transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s, background 0.18s;
+        border-radius: 10px;
+        padding: 0.15rem 0.3rem;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        background: transparent;
+        min-width: 60px;
+        max-width: 70px;
+        margin: 0 0.1rem;
+    }
+    .filter i {
+        color: inherit !important;
+        font-size: 1.2rem;
+        transition: color 0.18s, transform 0.18s;
+    }
+    .filter:hover, .filter:focus {
+        opacity: 1;
+        cursor: pointer;
+        background: #f7f7f7;
+        box-shadow: 0 4px 16px 0 rgba(255,90,95,0.10);
+        transform: scale(1.13) translateY(-2px);
+    }
+    .filter:hover i, .filter:focus i {
+        color: #FF5A5F !important;
+        transform: scale(1.18);
+    }
+    .filter:active {
+        background: #ffeaea;
+        transform: scale(0.97);
+    }
+    .carousel-arrow {
+        background: none;
+        border: none;
+        color: #222;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0 0.3rem;
+        z-index: 2;
+        transition: color 0.18s;
+        user-select: none;
+    }
+    .carousel-arrow:disabled {
+        color: #ccc;
+        cursor: default;
     }
     .filters-dropdown {
         display: none;
@@ -65,112 +118,201 @@
         z-index: 10;
         flex-direction: column;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 0.5rem 0.5rem;
     }
     .filters-dropdown.open .filters-dropdown-content {
         display: flex;
     }
-    @media (max-width: 1399px) {
-        .filters-row {
-            display: none;
+    .filters-dropdown-content .filter {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0.4rem 0.7rem;
+        min-width: 180px;
+        background: transparent;
+        border-radius: 8px;
+        margin: 0.1rem 0;
+        font-size: 1rem;
+        transition: background 0.18s, color 0.18s;
+    }
+    .filters-dropdown-content .filter i {
+        font-size: 1.3rem;
+        margin-right: 1.1rem;
+        color: inherit !important;
+        min-width: 1.5em;
+        text-align: left;
+    }
+    .filters-dropdown-content .filter .label {
+        flex: 1 1 auto;
+        text-align: left;
+        font-size: 1.05rem;
+        color: #222;
+        font-weight: 500;
+    }
+    .filters-dropdown-content .filter:hover, .filters-dropdown-content .filter:focus {
+        background: #f7f7f7;
+        color: #FF5A5F;
+        box-shadow: 0 2px 8px 0 rgba(255,90,95,0.08);
+    }
+    .filters-dropdown-content .filter:hover i, .filters-dropdown-content .filter:focus i {
+        color: #FF5A5F !important;
+    }
+    @media (max-width: 1200px) {
+        .filter-carousel-wrapper {
+            display: none !important;
         }
         .filters-dropdown {
-            display: block;
-        }
-        .taxSwitch {
-            margin-left: 1rem;
-        }
-        .filters-container {
-            flex-wrap: nowrap;
+            display: block !important;
         }
     }
-    @media (min-width: 1400px) {
-        .filters-row {
-            display: flex;
-        }
+    @media (min-width: 1201px) {
         .filters-dropdown {
-            display: none;
+            display: none !important;
+        }
+        .filter-carousel-wrapper {
+            display: flex !important;
+        }
+    }
+    @media (max-width: 600px) {
+        .filter {
+            min-width: 48px;
+            max-width: 54px;
+            font-size: 0.7rem;
+        }
+        .filter i {
+            font-size: 1rem;
+        }
+        .taxSwitch {
+            min-width: 120px;
+            font-size: 0.85rem;
+        }
+        .carousel-arrow {
+            font-size: 1.5rem;
+        }
+        .filters-dropdown-content .filter {
+            font-size: 0.95rem;
+            padding: 0.35rem 0.5rem;
+            min-width: 120px;
+        }
+        .filters-dropdown-content .filter i {
+            font-size: 1.1rem;
+            margin-right: 0.7rem;
+        }
+        .filters-dropdown-content .filter .label {
+            font-size: 0.98rem;
+        }
+        .taxSwitch {
+            display: none !important;
+        }
+        .filters-dropdown-content .taxSwitch-dropdown {
+            display: flex !important;
+            border: none;
+            background: transparent;
+            min-width: 0;
+            margin: 0.2rem 0 0.4rem 0;
+            padding: 0;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .filters-dropdown-content .taxSwitch-dropdown label {
+            font-size: 0.98rem;
+            margin-left: 0.5rem;
+        }
+    }
+    @media (min-width: 601px) {
+        .filters-dropdown-content .taxSwitch-dropdown {
+            display: none !important;
         }
     }
 </style>
 
 <div class="filters-container">
-    <div class="filters-row">
-        <div class="filter">
-            <i class="fa-solid fa-fire"></i>
-            <div class="label">Trending</div>
+    <div class="taxSwitch">
+        <div class="form-check form-switch form-check-reverse">
+            <input class="form-check-input switch" type="checkbox" id="switchCheckReverse">
+            <label class="form-check-label switch" for="switchCheckReverse">Inclusive Of Taxes</label>
         </div>
-        <div class="filter">
-            <i class="fa-solid fa-bed"></i>
-            <div class="label">Rooms</div>
+    </div>
+    <div class="filter-carousel-wrapper">
+        <button class="carousel-arrow" id="filterLeftArrow" aria-label="Scroll left">&#x2039;</button>
+        <div class="filter-carousel" id="filterCarousel">
+            <a class="filter" href="/listings?category=Trending" style="<% if(selectedCategory==='Trending'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-fire"></i>
+                <div class="label">Trending</div>
+            </a>
+            <a class="filter" href="/listings?category=Rooms" style="<% if(selectedCategory==='Rooms'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-bed"></i>
+                <div class="label">Rooms</div>
+            </a>
+            <a class="filter" href="/listings?category=Amazing views" style="<% if(selectedCategory==='Amazing views'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-mountain-sun"></i>
+                <div class="label">Viewpoints</div>
+            </a>
+            <a class="filter" href="/listings?category=Iconic cities" style="<% if(selectedCategory==='Iconic cities'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-city"></i>
+                <div class="label">Iconic</div>
+            </a>
+            <a class="filter" href="/listings?category=Beach" style="<% if(selectedCategory==='Beach'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <div class="label">Beach</div>
+            </a>
+            <a class="filter" href="/listings?category=Mountains" style="<% if(selectedCategory==='Mountains'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-mountain"></i>
+                <div class="label">Mountains</div>
+            </a>
+            <a class="filter" href="/listings?category=OMG!" style="<% if(selectedCategory==='OMG!'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-shuttle-space"></i>
+                <div class="label">OMG! </div>
+            </a>
+            <a class="filter" href="/listings?category=Boats" style="<% if(selectedCategory==='Boats'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-ship"></i>
+                <div class="label">Boats</div>
+            </a>
+            <a class="filter" href="/listings?category=Camp" style="<% if(selectedCategory==='Camp'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-campground"></i>
+                <div class="label">Camp</div>
+            </a>
+            <a class="filter" href="/listings?category=Domes" style="<% if(selectedCategory==='Domes'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-igloo"></i>
+                <div class="label">Domes</div>
+            </a>
+            <a class="filter" href="/listings?category=Luxury" style="<% if(selectedCategory==='Luxury'){ %>font-weight:bold;opacity:1;<% } %>">
+                <i class="fa-solid fa-crown"></i>
+                <div class="label">Luxury</div>
+            </a>
         </div>
-        <div class="filter">
-            <i class="fa-solid fa-mountain-sun"></i>
-            <div class="label">Amazing views</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-city"></i>
-            <div class="label">Iconic cities</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-umbrella-beach"></i>
-            <div class="label">Beach</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-mountain"></i>
-            <div class="label">Mountains</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-shuttle-space"></i>
-            <div class="label">OMG! </div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-ship"></i>
-            <div class="label">Boats</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-campground"></i>
-            <div class="label">Camp</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-igloo"></i>
-            <div class="label">Domes</div>
-        </div>
-        <div class="filter">
-            <i class="fa-solid fa-crown"></i>
-            <div class="label">Luxury</div>
-        </div>
-        <div class="taxSwitch">
-            <div class="form-check form-switch form-check-reverse">
-                <input class="form-check-input switch" type="checkbox" id="switchCheckReverse">
-                <label class="form-check-label switch" for="switchCheckReverse">Display price inclusive of taxes</label>
-            </div>
-        </div>
+        <button class="carousel-arrow" id="filterRightArrow" aria-label="Scroll right">&#x203A;</button>
     </div>
     <div class="filters-dropdown">
         <button class="filters-dropdown-btn" id="filtersDropdownBtn">
             <i class="fa-solid fa-sliders"></i> Filters
         </button>
         <div class="filters-dropdown-content" id="filtersDropdownContent">
-            <div class="filter filter-dropdown"><i class="fa-solid fa-fire"></i><span class="label">Trending</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-bed"></i><span class="label">Rooms</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-mountain-sun"></i><span class="label">Amazing views</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-city"></i><span class="label">Iconic cities</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-umbrella-beach"></i><span class="label">Beach</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-mountain"></i><span class="label">Mountains</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-shuttle-space"></i><span class="label">OMG! </span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-ship"></i><span class="label">Boats</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-campground"></i><span class="label">Camp</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-igloo"></i><span class="label">Domes</span></div>
-            <div class="filter filter-dropdown"><i class="fa-solid fa-crown"></i><span class="label">Luxury</span></div>
             <div class="taxSwitch taxSwitch-dropdown">
                 <div class="form-check form-switch form-check-reverse">
                     <input class="form-check-input switch" type="checkbox" id="switchCheckReverseDropdown">
-                    <label class="form-check-label switch" for="switchCheckReverseDropdown">Display price inclusive of taxes</label>
+                    <label class="form-check-label switch" for="switchCheckReverseDropdown">Inclusive Of Taxes</label>
                 </div>
             </div>
+            <a class="filter" href="/listings?category=Trending" style="<% if(selectedCategory==='Trending'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-fire"></i><span class="label">Trending</span></a>
+            <a class="filter" href="/listings?category=Rooms" style="<% if(selectedCategory==='Rooms'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-bed"></i><span class="label">Rooms</span></a>
+            <a class="filter" href="/listings?category=Amazing views" style="<% if(selectedCategory==='Amazing views'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-mountain-sun"></i><span class="label">Viewpoints</span></a>
+            <a class="filter" href="/listings?category=Iconic cities" style="<% if(selectedCategory==='Iconic cities'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-city"></i><span class="label">Iconic</span></a>
+            <a class="filter" href="/listings?category=Beach" style="<% if(selectedCategory==='Beach'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-umbrella-beach"></i><span class="label">Beach</span></a>
+            <a class="filter" href="/listings?category=Mountains" style="<% if(selectedCategory==='Mountains'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-mountain"></i><span class="label">Mountains</span></a>
+            <a class="filter" href="/listings?category=OMG!" style="<% if(selectedCategory==='OMG!'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-shuttle-space"></i><span class="label">OMG! </span></a>
+            <a class="filter" href="/listings?category=Boats" style="<% if(selectedCategory==='Boats'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-ship"></i><span class="label">Boats</span></a>
+            <a class="filter" href="/listings?category=Camp" style="<% if(selectedCategory==='Camp'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-campground"></i><span class="label">Camp</span></a>
+            <a class="filter" href="/listings?category=Domes" style="<% if(selectedCategory==='Domes'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-igloo"></i><span class="label">Domes</span></a>
+            <a class="filter" href="/listings?category=Luxury" style="<% if(selectedCategory==='Luxury'){ %>font-weight:bold;opacity:1;<% } %>"><i class="fa-solid fa-crown"></i><span class="label">Luxury</span></a>
         </div>
     </div>
 </div>
+
+<% if (allListings.length === 0) { %>
+    <div class="alert alert-warning mt-4">No listings found matching your search.</div>
+<% } %>
 
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
     <%for(list of allListings){%>
@@ -180,7 +322,7 @@
                 <div class="card-img-overlay"><%=list.description%></div>
                 <div class="card-body">
                     <h4> <b><%= list.title %></b></h4>
-                    <p class="card-text "> &#8377; <%=list.price.toLocaleString("en-IN") %> /night <i class="taxInfo">&nbsp; +18%GST</i> </p>
+                    <p class="card-text "> &#8377; <span class="listing-price" data-base-price="<%=list.price%>"><%=list.price.toLocaleString("en-IN") %></span> /night </p>
                 </div>
             </div>
         </a>
@@ -205,18 +347,91 @@
     // Taxes toggle for both main and dropdown
     let taxSwitch = document.getElementById("switchCheckReverse")
     let taxSwitchDropdown = document.getElementById("switchCheckReverseDropdown")
-    function toggleTaxInfo() {
-        let taxInfo = document.getElementsByClassName("taxInfo")
-        for(info of taxInfo){
-            if(info.style.display !== "inline"){
-                info.style.display = "inline"
-            }else{
-                info.style.display = "none"
+
+    function updatePricesWithTax(showTax) {
+        const priceSpans = document.querySelectorAll('.listing-price');
+        priceSpans.forEach(span => {
+            const basePrice = parseFloat(span.getAttribute('data-base-price'));
+            if (showTax) {
+                const taxed = Math.round(basePrice * 1.18);
+                span.textContent = taxed.toLocaleString("en-IN");
+            } else {
+                span.textContent = basePrice.toLocaleString("en-IN");
             }
-        }
+        });
+    }
+
+    function toggleTaxInfo() {
+        let checked = this.checked;
+        updatePricesWithTax(checked);
+        if (taxSwitch) taxSwitch.checked = checked;
+        if (taxSwitchDropdown) taxSwitchDropdown.checked = checked;
     }
     if (taxSwitch) taxSwitch.addEventListener("click", toggleTaxInfo)
     if (taxSwitchDropdown) taxSwitchDropdown.addEventListener("click", toggleTaxInfo)
+
+    // Carousel logic for filter icons
+    const filterCarousel = document.getElementById('filterCarousel');
+    const leftArrow = document.getElementById('filterLeftArrow');
+    const rightArrow = document.getElementById('filterRightArrow');
+    let scrollAmount = 0;
+    let scrollStep = 120;
+    function updateArrows() {
+        if (!filterCarousel) return;
+        leftArrow.disabled = filterCarousel.scrollLeft <= 0;
+        rightArrow.disabled = filterCarousel.scrollLeft + filterCarousel.offsetWidth >= filterCarousel.scrollWidth - 2;
+    }
+    if (filterCarousel && leftArrow && rightArrow) {
+        leftArrow.addEventListener('click', () => {
+            filterCarousel.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+            setTimeout(updateArrows, 350);
+        });
+        rightArrow.addEventListener('click', () => {
+            filterCarousel.scrollBy({ left: scrollStep, behavior: 'smooth' });
+            setTimeout(updateArrows, 350);
+        });
+        filterCarousel.addEventListener('scroll', updateArrows);
+        window.addEventListener('resize', updateArrows);
+        setTimeout(updateArrows, 200);
+    }
+    // Touch drag support
+    let isDown = false, startX, scrollLeft;
+    filterCarousel.addEventListener('mousedown', (e) => {
+        isDown = true;
+        filterCarousel.classList.add('dragging');
+        startX = e.pageX - filterCarousel.offsetLeft;
+        scrollLeft = filterCarousel.scrollLeft;
+    });
+    filterCarousel.addEventListener('mouseleave', () => {
+        isDown = false;
+        filterCarousel.classList.remove('dragging');
+    });
+    filterCarousel.addEventListener('mouseup', () => {
+        isDown = false;
+        filterCarousel.classList.remove('dragging');
+    });
+    filterCarousel.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - filterCarousel.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        filterCarousel.scrollLeft = scrollLeft - walk;
+    });
+    // Touch events
+    filterCarousel.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - filterCarousel.offsetLeft;
+        scrollLeft = filterCarousel.scrollLeft;
+    });
+    filterCarousel.addEventListener('touchend', () => {
+        isDown = false;
+    });
+    filterCarousel.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - filterCarousel.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        filterCarousel.scrollLeft = scrollLeft - walk;
+    });
 </script>
     
 
