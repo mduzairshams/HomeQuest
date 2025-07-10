@@ -5,8 +5,21 @@ const mapToken = process.env.MAP_TOKEN
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
-    let  allListings= await Listing.find()
-    res.render("../views/listings/home.ejs",{allListings})
+    const { category, search } = req.query;
+    let allListings;
+    let searchQuery = {};
+    if (search) {
+        const regex = new RegExp(search, 'i');
+        searchQuery = { $or: [ { title: regex }, { location: regex } ] };
+    }
+    if (category) {
+        allListings = await Listing.find({ ...searchQuery, category: category });
+    } else if (search) {
+        allListings = await Listing.find(searchQuery);
+    } else {
+        allListings = await Listing.find();
+    }
+    res.render("../views/listings/home.ejs", { allListings, selectedCategory: category || null, searchTerm: search || '' });
 }
 
 module.exports.newListing =  (req, res) => {
@@ -91,3 +104,13 @@ module.exports.deleteListing = async (req, res) => {
     req.flash("success", "Listing deleted!")
     res.redirect("/listings")
 }
+
+module.exports.liveSearch = async (req, res) => {
+  const { q } = req.query;
+  if (!q || q.trim() === '') return res.json([]);
+  const regex = new RegExp(q, 'i');
+  const listings = await Listing.find({ $or: [ { title: regex }, { location: regex } ] })
+    .limit(8)
+    .select('_id title location');
+  res.json(listings);
+};

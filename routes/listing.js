@@ -29,7 +29,7 @@ router
 //Edit Route renders form to get info
 router.get("/:id/edit", isLoggedIn, ownerRecognition, wrapAsync(listingController.editListing))
 
-
+router.get('/search', require('../controllers/listingController').liveSearch);
 
 
 module.exports = router
