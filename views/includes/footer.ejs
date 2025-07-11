@@ -2,11 +2,23 @@
     <div class="f-info">
 
         <div class="f-info-socials">
-            <i class="fa-solid fa-globe"></i> &nbsp; English  &nbsp; &nbsp; &nbsp;
-            <i class="fa-solid fa-indian-rupee-sign"></i> INR  &nbsp; &nbsp; &nbsp;
-            <a class="ptc" href="https://www.facebook.com/" target="/"><i class="fa-brands fa-square-facebook "></i></a>  &nbsp;
-            <a class="ptc" href="https://www.instagram.com/" target="/"><i class="fa-brands fa-square-instagram"></i></a>  &nbsp;
-            <a class="ptc" href="https://www.x.com/" target="/"><i class="fa-brands fa-square-x-twitter"></i></a>  &nbsp;
+            <span class="footer-inline-group"><i class="fa-solid fa-globe"></i> <span>English</span></span> &nbsp; &nbsp;
+            <span class="footer-inline-group"><i class="fa-solid fa-indian-rupee-sign"></i> <span>INR</span></span> &nbsp; &nbsp;
+            <!-- Socials Dropdown for mobile -->
+            <div class="socials-dropdown d-block d-md-none">
+                <button class="socials-toggle" onclick="toggleSocialsDropdown()">Socials <i class="fa fa-caret-down"></i></button>
+                <div id="socialsDropdownContent" class="socials-dropdown-content">
+                    <a class="ptc" href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+                    <a class="ptc" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+                    <a class="ptc" href="https://www.x.com/" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+                </div>
+            </div>
+            <!-- Inline socials for desktop -->
+            <span class="d-none d-md-inline">
+                <a class="ptc" href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-square-facebook "></i></a>  &nbsp;
+                <a class="ptc" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>  &nbsp;
+                <a class="ptc" href="https://www.x.com/" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>  &nbsp;
+            </span>
         </div>
         <br>
         <div class="f-info-company">
@@ -18,3 +30,135 @@
         </div> 
     </div>
 </footer>
+<style>
+    .f-info {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        background: #f5f5f5;
+    }
+    footer {
+        position: relative;
+        width: 100%;
+    }
+    html, body {
+        height: 100%;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+    footer {
+        flex-shrink: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .f-info-socials {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .f-info-company, .f-info-ptc {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+    .ptc {
+        text-decoration: none;
+        color: inherit;
+    }
+    .fa-square-facebook {
+        transition: color 0.2s;
+    }
+    .fa-square-facebook:hover {
+        color: #1877f3 !important;
+    }
+    .fa-square-instagram {
+        transition: color 0.2s;
+    }
+    .fa-square-instagram:hover {
+        color: #e1306c !important;
+        /* fallback for gradient: use main pink */
+    }
+    .fa-square-x-twitter {
+        transition: color 0.2s;
+    }
+    .fa-square-x-twitter:hover {
+        color: #000 !important;
+    }
+    .socials-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .socials-toggle {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0.3rem 0.8rem;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 0.2rem;
+    }
+    .socials-dropdown-content {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 110%;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        min-width: 120px;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 0.5rem 0.5rem;
+        text-align: left;
+    }
+    .socials-dropdown-content a {
+        display: block;
+        margin: 0.3rem 0;
+        font-size: 1.3rem;
+    }
+    .footer-inline-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    @media (max-width: 600px) {
+        .f-info-socials {
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        .footer-inline-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+        .f-info-company, .f-info-ptc {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+<script>
+    function toggleSocialsDropdown() {
+        var content = document.getElementById('socialsDropdownContent');
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+        } else {
+            content.style.display = 'block';
+        }
+    }
+    // Optional: Close dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        var dropdown = document.getElementById('socialsDropdownContent');
+        var button = document.querySelector('.socials-toggle');
+        if (dropdown && button && !button.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+</script>
