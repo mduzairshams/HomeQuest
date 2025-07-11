@@ -69,6 +69,11 @@ const sessionOptions = {
 
 
 
+// Redirect root route to /listings
+app.get('/', (req, res) => {
+    res.redirect('/listings');
+});
+
 // app.get("/", (req, res) => {
 //     res.send("Root route / is working and server is listening at port 8080")
 // })
