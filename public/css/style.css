@@ -32,7 +32,7 @@ a:hover{
 
 
 body {
-  color: rgb(228, 39, 39);
+  color: rgb(228, 39, 39) !important;
 }
 
 /* body {
