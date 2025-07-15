@@ -1,108 +1,38 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("/layouts/boilerplate") %> 
+
+<div class="right-sidebar-book">
+    <p>Get 10% off on your first booking</p>
+    <% if(currUser) { %>
+        <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
+          <button type="submit" class="book-btn">Book Now !</button>
+        </form>
+    <% } else { %>
+      <a href="/signup" class="book-btn">Book Now !</a>
+    <% } %>
+    <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
+</div>
+<script>
+  // Countdown timer for 2 hours
+  const timerElement = document.getElementById('countdown-timer');
+  let timeLeft = 3 * 60 * 60; // 3 hours in seconds
+  function updateTimer() {
+    const hours = Math.floor(timeLeft / 3600);
+    const minutes = Math.floor((timeLeft % 3600) / 60);
+    const seconds = timeLeft % 60;
+    timerElement.textContent = `${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} left`;
+    if (timeLeft > 0) {
+      timeLeft--;
+    }
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+
+<script>
+    let mapToken ='<%= process.env.MAP_TOKEN %>'
+    let listing = <%- JSON.stringify(listing) %>
+</script>
 <style>
-  .right-sidebar-book {
-    position: absolute;
-    top: 6.5rem;
-    right: 3rem;
-    width: 320px;
-    background: #fff;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    z-index: 10;
-    padding: 2rem 1.2rem 1.5rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .main-content-center {
-    max-width: 600px;
-    margin: 0 auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  .right-sidebar-book p {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 0.7rem;
-    text-align: center;
-    color: #222;
-  }
-  .right-sidebar-book .book-btn {
-    width: 100%;
-    background: #FF5A5F;
-    color: #fff;
-    border: none;
-    border-radius: 18px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 0.8rem 0;
-    margin-bottom: 0.7rem;
-    box-shadow: 0 4px 24px rgba(255,90,95,0.18);
-    transition: background 0.2s, color 0.2s, transform 0.18s;
-    cursor: pointer;
-  }
-  .right-sidebar-book .book-btn:hover {
-    background: #f43a40;
-    color: #fff;
-    transform: scale(1.04);
-  }
-  .book-now-btn {
-    background: linear-gradient(90deg, #FF5A5F 0%, #f43a40 100%);
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: 2rem;
-    box-shadow: 0 4px 18px rgba(255,90,95,0.18), 0 1.5px 8px rgba(0,0,0,0.04);
-    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
-    padding: 0.75rem 0;
-    outline: none;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-  .book-now-btn::after {
-    content: "→";
-    margin-left: 0.7em;
-    font-size: 1.2em;
-    transition: margin-left 0.18s;
-  }
-  .book-now-btn:hover, .book-now-btn:focus {
-    background: linear-gradient(90deg, #f43a40 0%, #FF5A5F 100%);
-    color: #fff;
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 8px 32px rgba(255,90,95,0.28);
-  }
-  .book-now-btn:hover::after {
-    margin-left: 1.2em;
-  }
-  .countdown-timer {
-    font-size: 1rem;
-    color: #000;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    padding-left: 10px;
-    text-align: left;
-  }
-  @media (max-width: 991.98px) {
-    .right-sidebar-book {
-      position: static;
-      width: 100%;
-      margin: 1.5rem 0 0 0;
-      border-radius: 14px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-      right: unset;
-      top: unset;
-    }
-    .main-content-center {
-      max-width: 100%;
-      padding: 1rem 0;
-    }
-  }
   .show-img {
     width: 100%;
     height: auto;
@@ -143,7 +73,7 @@
 </style>
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="main-content-center col-12 col-lg-8">
+    <div class="col-lg-6 col-md-8 col-12">
       <h3 class="mb-3 mt-3 text-center"><%=listing.title %></h3>
       <div class="card w-100 mb-3">
         <img src="<%= listing.image.url %>" class="card-img-top show-img mb-3" alt="Listing_image">
@@ -157,21 +87,23 @@
           <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
           <p class="card-text"><%= listing.location %></p>
           <p class="card-text"><%= listing.country %></p>
-          <button class="book-now-btn">Book Now</button>
+        <% if (!(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id))) { %>
+          <button class="btn btn-dark add-btn book-now-btn w-100 mb-3">Book Now</button>
+        <% } %>
         </div>
       </div>
       <%if(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id)){%>
-        <div class="row g-2 mb-3">
-          <div class="col-12 col-md-6">
-            <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn w-100">Edit my place</a>
-          </div>
-          <div class="col-12 col-md-6">
-            <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-              <button class="btn btn-dark w-100">Delete my place</button>
-            </form>
-          </div>
-        </div>
-      <% } %>
+  <div class="row g-2 mb-3">
+    <div class="col-12 col-md-6">
+      <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn w-100">Edit my place</a>
+    </div>
+    <div class="col-12 col-md-6">
+      <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+        <button class="btn btn-dark w-100">Delete my place</button>
+      </form>
+    </div>
+  </div>
+<% } %>
       <div>
         <hr>
         <form method="POST" class="needs-validation" novalidate action="/listings/<%= listing._id%>/reviews">
@@ -228,39 +160,6 @@
         <div id="map" class="mb-3 mt-3"></div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-12">
-      <div class="right-sidebar-book">
-        <p>Get 10% off on your first booking</p>
-        <% if(currUser) { %>
-          <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
-            <button type="submit" class="book-btn">Book Now !</button>
-          </form>
-        <% } else { %>
-          <a href="/signup" class="book-btn">Book Now !</a>
-        <% } %>
-        <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
-      </div>
-    </div>
   </div>
 </div>
-<script>
-  // Countdown timer for 3 hours
-  const timerElement = document.getElementById('countdown-timer');
-  let timeLeft = 3 * 60 * 60; // 3 hours in seconds
-  function updateTimer() {
-    const hours = Math.floor(timeLeft / 3600);
-    const minutes = Math.floor((timeLeft % 3600) / 60);
-    const seconds = timeLeft % 60;
-    timerElement.textContent = `${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} left`;
-    if (timeLeft > 0) {
-      timeLeft--;
-    }
-  }
-  updateTimer();
-  setInterval(updateTimer, 1000);
-</script>
-<script>
-  let mapToken ='<%= process.env.MAP_TOKEN %>'
-  let listing = <%- JSON.stringify(listing) %>
-</script>
 <script src="/js/map.js"></script>
