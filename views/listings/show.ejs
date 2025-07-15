@@ -1,4 +1,93 @@
 <% layout("/layouts/boilerplate") %> 
+<style>
+  .right-sidebar-book {
+    position: absolute;
+    top: 6.5rem;
+    right: 3rem;
+    width: 350px;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    z-index: 10;
+    padding: 2rem 1.2rem 1.5rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .right-sidebar-book p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+    text-align: center;
+    color: #222;
+  }
+  .right-sidebar-book .book-btn {
+    background: #FF5A5F;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.18s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 180px;
+    margin-bottom: 0.7rem;
+    text-decoration: none;
+  }
+  .right-sidebar-book .book-btn:hover {
+    background: #f43a40;
+    color: #fff;
+  }
+  .countdown-timer {
+    font-size: 1rem;
+    color: #000;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding-left: 10px;
+    text-align: left;
+  }
+  @media (max-width: 991.98px) {
+    .right-sidebar-book {
+      position: static;
+      width: 100%;
+      margin: 1.5rem 0 0 0;
+      border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      right: unset;
+      top: unset;
+    }
+  }
+<div class="right-sidebar-book">
+    <p>Get 10% off on your first booking</p>
+    <% if(currUser) { %>
+        <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
+          <button type="submit" class="book-btn">Book Now !</button>
+        </form>
+    <% } else { %>
+      <a href="/signup" class="book-btn">Book Now !</a>
+    <% } %>
+    <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
+</div>
+<script>
+  // Countdown timer for 2 hours
+  const timerElement = document.getElementById('countdown-timer');
+  let timeLeft = 3 * 60 * 60; // 3 hours in seconds
+  function updateTimer() {
+    const hours = Math.floor(timeLeft / 3600);
+    const minutes = Math.floor((timeLeft % 3600) / 60);
+    const seconds = timeLeft % 60;
+    timerElement.textContent = `${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} left`;
+    if (timeLeft > 0) {
+      timeLeft--;
+    }
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+
 <script>
     let mapToken ='<%= process.env.MAP_TOKEN %>'
     let listing = <%- JSON.stringify(listing) %>
@@ -58,8 +147,9 @@
           <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
           <p class="card-text"><%= listing.location %></p>
           <p class="card-text"><%= listing.country %></p>
-          
+        <% if (!(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id))) { %>
           <button class="btn btn-dark add-btn book-now-btn w-100 mb-3">Book Now</button>
+        <% } %>
         </div>
       </div>
       <%if(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id)){%>
