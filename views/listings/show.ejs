@@ -74,6 +74,109 @@
       height: 160px;
     }
   }
+  .right-sidebar-book {
+    position: fixed;
+    top: 6.5rem;
+    right: 2rem;
+    width: 340px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(80, 80, 80, 0.18), 0 2px 12px rgba(255,90,95,0.08);
+    z-index: 100;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1.5px solid #f2f2f2;
+    transition: box-shadow 0.2s;
+}
+.right-sidebar-book:hover {
+    box-shadow: 0 16px 48px rgba(80, 80, 80, 0.28), 0 4px 24px rgba(255,90,95,0.18);
+}
+.right-sidebar-book p {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #FF5A5F;
+    background: linear-gradient(90deg, #fff7f7 0%, #ffeaea 100%);
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 2px 8px rgba(255,90,95,0.08);
+    border: 1px solid #ffd6d6;
+    letter-spacing: 1px;
+}
+.right-sidebar-book .book-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #FF5A5F 0%, #f43a40 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.18rem;
+    font-weight: 700;
+    padding: 0.95rem 0;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 18px rgba(255,90,95,0.18);
+    transition: background 0.2s, color 0.2s, transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+.right-sidebar-book .book-btn::after {
+    content: "🚀";
+    margin-left: 0.8em;
+    font-size: 1.3em;
+    transition: margin-left 0.18s;
+}
+.right-sidebar-book .book-btn:hover {
+    background: linear-gradient(90deg, #f43a40 0%, #FF5A5F 100%);
+    color: #fff;
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255,90,95,0.28);
+}
+.right-sidebar-book .book-btn:hover::after {
+    margin-left: 1.3em;
+}
+.countdown-timer {
+    font-size: 1.05rem;
+    color: #000;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    text-align: left;
+}
+@media (max-width: 1200px) {
+    .right-sidebar-book {
+        right: 0.5rem;
+        width: 95vw;
+        max-width: 340px;
+    }
+}
+@media (max-width: 991.98px) {
+    .right-sidebar-book {
+        position: static;
+        width: 100%;
+        margin: 1.5rem 0 0 0;
+        border-radius: 14px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        right: unset;
+        top: unset;
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+    }
+}
+@media (max-width: 767.98px) {
+    .right-sidebar-book {
+        padding: 1rem 0.2rem 0.8rem 0.2rem;
+        font-size: 0.98rem;
+    }
+}
+@media (max-width: 575.98px) {
+    .right-sidebar-book {
+        padding: 0.7rem 0.1rem 0.5rem 0.1rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+  }
 </style>
 <div class="container-fluid">
   <div class="row justify-content-center">
