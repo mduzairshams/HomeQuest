@@ -1,86 +1,54 @@
-<% layout("/layouts/boilerplate") %>
-
+<% layout("/layouts/boilerplate") %> 
+<!-- Sticker as right sidebar below navbar -->
 <style>
-  .main-content {
-    max-width: 700px;
-    margin: 0 auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  .sidebar-wrapper {
-    position: relative;
-  }
   .right-sidebar-book {
-    position: fixed;
+    position: absolute;
     top: 6.5rem;
-    right: 2.5rem;
-    width: 340px;
+    right: 3rem;
+    width: 350px;
     background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(80, 80, 80, 0.18), 0 2px 12px rgba(255,90,95,0.08);
-    z-index: 100;
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    z-index: 10;
+    padding: 2rem 1.2rem 1.5rem 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1.5px solid #f2f2f2;
-    transition: box-shadow 0.2s;
-  }
-  .right-sidebar-book:hover {
-    box-shadow: 0 16px 48px rgba(80, 80, 80, 0.28), 0 4px 24px rgba(255,90,95,0.18);
   }
   .right-sidebar-book p {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
     text-align: center;
     color: #222;
   }
   .right-sidebar-book .book-btn {
-    width: 100%;
-    background: linear-gradient(90deg, #FF5A5F 0%, #f43a40 100%);
+    background: #FF5A5F;
     color: #fff;
     border: none;
-    border-radius: 2rem;
-    font-size: 1.18rem;
-    font-weight: 700;
-    padding: 0.95rem 0;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 18px rgba(255,90,95,0.18);
-    transition: background 0.2s, color 0.2s, transform 0.18s, box-shadow 0.18s;
-    cursor: pointer;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-  }
-  .right-sidebar-book .book-btn::after {
-    content: "🚀";
-    margin-left: 0.8em;
-    font-size: 1.3em;
-    transition: margin-left 0.18s;
+    border-radius: 12px;
+    padding: 0.7rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.18s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 180px;
+    margin-bottom: 0.7rem;
+    text-decoration: none;
   }
   .right-sidebar-book .book-btn:hover {
-    background: linear-gradient(90deg, #f43a40 0%, #FF5A5F 100%);
+    background: #f43a40;
     color: #fff;
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 8px 32px rgba(255,90,95,0.28);
-  }
-  .right-sidebar-book .book-btn:hover::after {
-    margin-left: 1.3em;
   }
   .countdown-timer {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #000;
     font-weight: 600;
     margin-top: 0.5rem;
+    padding-left: 10px;
     text-align: left;
-  }
-  @media (max-width: 1200px) {
-    .right-sidebar-book {
-      right: 0.5rem;
-      width: 95vw;
-      max-width: 340px;
-    }
   }
   @media (max-width: 991.98px) {
     .right-sidebar-book {
@@ -92,121 +60,27 @@
       right: unset;
       top: unset;
     }
-    .main-content {
-      max-width: 100%;
-      padding: 1rem 0;
-    }
   }
 </style>
-
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="main-content col-12 col-lg-8">
-      <h3 class="mb-3 mt-3 text-center"><%=listing.title %></h3>
-      <div class="card w-100 mb-3">
-        <img src="<%= listing.image.url %>" class="card-img-top show-img mb-3" alt="Listing_image">
-        <div class="card-body">
-          <% if (listing.owner && listing.owner.username) { %>
-          <p class="card-text">Owned by <i><%= listing.owner.username %></i></p>
-          <% } else { %>
-          <p class="card-text">Owned by <i>Unknown</i></p>
-          <% } %>
-          <p class="card-text"><%= listing.description %></p>
-          <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
-          <p class="card-text"><%= listing.location %></p>
-          <p class="card-text"><%= listing.country %></p>
-        <% if (!(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id))) { %>
-          <button class="btn btn-dark add-btn book-now-btn w-100 mb-3">Book Now</button>
-        <% } %>
-        </div>
-      </div>
-      <%if(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id)){%>
-  <div class="row g-2 mb-3">
-    <div class="col-12 col-md-6">
-      <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn w-100">Edit my place</a>
-    </div>
-    <div class="col-12 col-md-6">
-      <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button class="btn btn-dark w-100">Delete my place</button>
-      </form>
-    </div>
-  </div>
-<% } %>
-      <div>
-        <hr>
-        <form method="POST" class="needs-validation" novalidate action="/listings/<%= listing._id%>/reviews">
-          <% if(currUser){ %>
-          <h4 class="mb-3">Experience Showcase</h4>
-          <div class="card-body mb-3 mt-3">
-            <label for="rating" class="card-text">Rating</label>
-            <fieldset class="starability-basic">
-              <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-              <input type="radio" id="second-rate1" name="review[rating]" value="1" />
-              <label for="second-rate1" title="Terrible">1 star</label>
-              <input type="radio" id="second-rate2" name="review[rating]" value="2" />
-              <label for="second-rate2" title="Not good">2 stars</label>
-              <input type="radio" id="second-rate3" name="review[rating]" value="3" />
-              <label for="second-rate3" title="Average">3 stars</label>
-              <input type="radio" id="second-rate4" name="review[rating]" value="4" />
-              <label for="second-rate4" title="Very good">4 stars</label>
-              <input type="radio" id="second-rate5" name="review[rating]" value="5" />
-              <label for="second-rate5" title="Amazing">5 stars</label>
-            </fieldset>
-          </div>
-          <div class="mb-3 mt-3">
-            <label for="comment" class="form-label mb-3">Comment</label>
-            <textarea required name="review[comment]" id="comment" placeholder="Write a comment by sharing your experience" class="form-control" cols="25" rows="4"></textarea>
-            <div class="invalid-feedback">Please write a review</div>
-            <div class="valid-feedback">Thanks for review</div>
-          </div>
-          <button class="mb-4 btn btn-dark add-btn col-12 col-md-4 mb-3">Submit</button>
+<div class="right-sidebar-book">
+    <p>Get 10% off on your first booking</p>
+    <% if(currUser) { %>
+      <% if(listing.bookedBy && listing.bookedBy.equals(currUser._id)) { %>
+        <button class="book-btn" style="background:#aaa;cursor:not-allowed;" disabled>Booked</button>
+      <% } else { %>
+        <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
+          <button type="submit" class="book-btn">Book Now !</button>
         </form>
-        <hr>
-        <% } %>
-        <% if(listing.reviews.length >= 1){ %>
-        <div class="row">
-          <h4>Our Reviews</h4>
-          <%for(review of listing.reviews){%>
-          <div class="card review-card col-12 mb-2">
-            <div class="card-body">
-              <h5 class="card-title"><%= review.author.username %></h5>
-              <p class="card-text"><%= review.comment %></p>
-              <p class="starability-result" data-rating="<%= review.rating %>">Rated: <%= review.rating %></p>
-            </div>
-            <% if(currUser && listing.owner && listing.owner._id && currUser._id.equals(listing.owner._id)) { %>
-            <form method="POST" class="mb-2 mt-2" action="/listings/<%=listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-              <button class="btn btn-dark">Delete</button>
-            </form>
-            <% } %>
-          </div>
-          <%}%>
-        </div>
-        <%}%>
-      </div>
-      <div class="mb-3 mt-3">
-        <h3>Where you'll be</h3>
-        <div id="map" class="mb-3 mt-3"></div>
-      </div>
-    </div>
-    <div class="sidebar-wrapper col-lg-4 col-md-4 col-12">
-      <div class="right-sidebar-book">
-        <p>Get 10% off on your first booking</p>
-        <% if(currUser) { %>
-          <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
-            <button type="submit" class="book-btn">Book Now !</button>
-          </form>
-        <% } else { %>
-          <a href="/signup" class="book-btn">Book Now !</a>
-        <% } %>
-        <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
-      </div>
-    </div>
-  </div>
+      <% } %>
+    <% } else { %>
+      <a href="/signup" class="book-btn">Book Now !</a>
+    <% } %>
+    <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
 </div>
 <script>
-  // Countdown timer for 3 hours
+  // Countdown timer for 2 hours
   const timerElement = document.getElementById('countdown-timer');
-  let timeLeft = 3 * 60 * 60; // 3 hours in seconds
+  let timeLeft = 3 * 60 * 60; // 2 hours in seconds
   function updateTimer() {
     const hours = Math.floor(timeLeft / 3600);
     const minutes = Math.floor((timeLeft % 3600) / 60);
@@ -220,7 +94,92 @@
   setInterval(updateTimer, 1000);
 </script>
 <script>
-    let mapToken ='<%= process.env.MAP_TOKEN %>'
-    let listing = <%- JSON.stringify(listing) %>
+    var mapToken = "<%= process.env.MAP_TOKEN %>";
+    var listing = <%- JSON.stringify(listing) %>;
 </script>
+    <div class="row">
+        <div class="col-8 offset-3">
+            <h3 class="mb-3"><%=listing.title %></h3>
+            <div class="card col-8">
+                <img src="<%= listing.image.url %>" class="card-img-top show-img mb-3" alt="Listing_image">
+                <div class="card-body">
+                    <p class="card-text">Owned by <i><%= listing.owner.username  %></i></p>
+                    <p class="card-text"><%= listing.description %></p>
+                    <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
+                    <p class="card-text"><%= listing.location %></p>
+                    <p class="card-text"><%= listing.country %></p>  
+
+                    </p>
+                    <button class="btn btn-dark add-btn book-now-btn w-100 mb-3">Book Now</button>
+                </div>
+            </div>
+
+           
+                  
+            <div>
+                <hr>
+                <form method="POST" class="needs-validation" novalidate action="/listings/<%= listing._id%>/reviews">
+                    <% if(currUser){ %>
+                    <h4 class="mb-3">Experience Showcase</h4>
+                    <div class="card-body mb-3 mt-3">
+                        <label for="rating" class="card-text">Rating</label>
+                        <fieldset  class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                            <input type="radio" id="second-rate1" name="review[rating]" value="1" />
+                            <label for="second-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="second-rate2" name="review[rating]" value="2" />
+                            <label for="second-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="second-rate3" name="review[rating]" value="3" />
+                            <label for="second-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="second-rate4" name="review[rating]" value="4" />
+                            <label for="second-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="second-rate5" name="review[rating]" value="5" />
+                            <label for="second-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="comment" class=" form-label mb-3">Comment</label>
+                        <textarea required name="review[comment]" id="comment" placeholder="Write a comment by sharing your experience" class="form-control" cols="25" rows="4"></textarea>
+                        <div class="invalid-feedback">Please write a review</div>
+                        <div class="valid-feedback">Thanks for review</div>
+                        
+                    </div>
+                    
+                    <button class="mb-4 btn btn-dark add-btn col-2 mb-3">Submit</button>
+                </form>
+                <hr>  
+                <% } %>  
+                <% if(listing.reviews.length >= 1){ %>
+                <div class="row">
+                        <h4>Our Reviews</h4>
+                    <%for(review of listing.reviews){%>
+                        <div class="card review-card col-6">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= review.author.username %></h5>
+                                <p class="card-text"><%= review.comment %></p>
+                                <p class="starability-result" data-rating="<%= review.rating %>">
+                                    Rated: <%= review.rating %>
+                                </p>
+                            </div>
+
+                        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+                        <form method="POST" class="mb-2 mt-2" action="/listings/<%=listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-dark">Delete</button>
+                        </form> 
+                        <% } %>
+                    </div>               
+                <%}%>
+                </div>
+                <%}%>   
+            </div>
+              
+        </div>
+
+            <div class="col-8 offset-3">
+                <h3>Where you'll be</h3>
+
+                <div id="map" class="mb-3 mt-3"></div>
+            </div>
+ </div>
+
 <script src="/js/map.js"></script>
