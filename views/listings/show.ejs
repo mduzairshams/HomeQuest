@@ -63,13 +63,13 @@
   </style>
 <div class="right-sidebar-book">
     <p>Get 10% off on your first booking</p>
-    <% if(currUser) { %>
+    <!-- <% if(currUser) { %>
         <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
           <button type="submit" class="book-btn">Book Now !</button>
         </form>
     <% } else { %>
       <a href="/signup" class="book-btn">Book Now !</a>
-    <% } %>
+    <% } %> -->
     <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
 </div>
 <script>
