@@ -450,3 +450,37 @@ body {
     font-size: 1.1rem;
   }
 } 
+
+/* BOOK NOW /*
+/* ...existing code... */
+.book-now-btn {
+    background: linear-gradient(90deg, #FF5A5F 0%, #f43a40 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 0 4px 18px rgba(255,90,95,0.18), 0 1.5px 8px rgba(0,0,0,0.04);
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    padding: 0.75rem 0;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.book-now-btn::after {
+    content: "→";
+    margin-left: 0.7em;
+    font-size: 1.2em;
+    transition: margin-left 0.18s;
+}
+.book-now-btn:hover, .book-now-btn:focus {
+    background: linear-gradient(90deg, #f43a40 0%, #FF5A5F 100%);
+    color: #fff;
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255,90,95,0.28);
+}
+.book-now-btn:hover::after {
+    margin-left: 1.2em;
+}
