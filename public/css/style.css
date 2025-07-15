@@ -30,10 +30,15 @@ a:hover{
 } */
 
 
-
+/*
 body {
-  color: rgb(228, 39, 39) !important;
+  background: linear-gradient(135deg, #111 0%, #222 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #fff;
 }
+*/
 
 /* body {
   font-family: "Plus Jakarta Sans", sans-serif;
