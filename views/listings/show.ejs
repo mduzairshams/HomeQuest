@@ -1,7 +1,7 @@
-<% layout("/layouts/boilerplate") %> 
+<% layout("/layouts/boilerplate") %>
 <style>
   .right-sidebar-book {
-    position: sticky;
+    position: absolute;
     top: 6.5rem;
     right: 3rem;
     width: 350px;
@@ -22,54 +22,57 @@
     text-align: center;
     color: #222;
   }
-  .right-sidebar-book .book-btn,
+  .right-sidebar-book .book-btn {
+    width: 100%;
+    background: #FF5A5F;
+    color: #fff;
+    border: none;
+    border-radius: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.8rem 0;
+    margin-bottom: 0.7rem;
+    box-shadow: 0 4px 24px rgba(255,90,95,0.18);
+    transition: background 0.2s, color 0.2s, transform 0.18s;
+    cursor: pointer;
+  }
+  .right-sidebar-book .book-btn:hover {
+    background: #f43a40;
+    color: #fff;
+    transform: scale(1.04);
+  }
   .book-now-btn {
     background: linear-gradient(90deg, #FF5A5F 0%, #f43a40 100%);
     color: #fff;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
     border: none;
     border-radius: 2rem;
-    padding: 0.85rem 2.5rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    box-shadow: 0 6px 24px rgba(255,90,95,0.22), 0 2px 12px rgba(0,0,0,0.06);
-    width: 100%;
-    max-width: 220px;
-    margin-bottom: 0.7rem;
-    text-decoration: none;
-    transition: 
-      background 0.18s,
-      box-shadow 0.18s,
-      transform 0.18s,
-      filter 0.18s;
+    box-shadow: 0 4px 18px rgba(255,90,95,0.18), 0 1.5px 8px rgba(0,0,0,0.04);
+    transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    padding: 0.75rem 0;
+    outline: none;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid #fff;
-    filter: drop-shadow(0 2px 8px #FF5A5F55);
+    width: 100%;
+    margin-bottom: 1rem;
   }
-  .right-sidebar-book .book-btn::after,
   .book-now-btn::after {
-    content: "🚀";
-    margin-left: 0.8em;
-    font-size: 1.3em;
-    transition: margin-left 0.18s, filter 0.18s;
-    filter: drop-shadow(0 0 2px #fff);
+    content: "→";
+    margin-left: 0.7em;
+    font-size: 1.2em;
+    transition: margin-left 0.18s;
   }
-  .right-sidebar-book .book-btn:hover,
-  .book-now-btn:hover,
-  .right-sidebar-book .book-btn:focus,
-  .book-now-btn:focus {
+  .book-now-btn:hover, .book-now-btn:focus {
     background: linear-gradient(90deg, #f43a40 0%, #FF5A5F 100%);
     color: #fff;
-    transform: scale(1.07) translateY(-2px);
-    box-shadow: 0 12px 36px rgba(255,90,95,0.32);
-    filter: brightness(1.08) drop-shadow(0 4px 16px #FF5A5F88);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255,90,95,0.28);
   }
-  .right-sidebar-book .book-btn:hover::after,
   .book-now-btn:hover::after {
-    margin-left: 1.3em;
-    filter: drop-shadow(0 0 6px #fff);
+    margin-left: 1.2em;
   }
   .countdown-timer {
     font-size: 1rem;
@@ -90,40 +93,6 @@
       top: unset;
     }
   }
-</style>
-<div class="right-sidebar-book">
-    <p>Get 10% off on your first booking</p>
-    <!-- <% if(currUser) { %>
-        <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
-          <button type="submit" class="book-btn">Book Now !</button>
-        </form>
-    <% } else { %>
-      <a href="/signup" class="book-btn">Book Now !</a>
-    <% } %> -->
-    <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
-</div>
-<script>
-  // Countdown timer for 2 hours
-  const timerElement = document.getElementById('countdown-timer');
-  let timeLeft = 3 * 60 * 60; // 3 hours in seconds
-  function updateTimer() {
-    const hours = Math.floor(timeLeft / 3600);
-    const minutes = Math.floor((timeLeft % 3600) / 60);
-    const seconds = timeLeft % 60;
-    timerElement.textContent = `${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} left`;
-    if (timeLeft > 0) {
-      timeLeft--;
-    }
-  }
-  updateTimer();
-  setInterval(updateTimer, 1000);
-</script>
-
-<script>
-    let mapToken ='<%= process.env.MAP_TOKEN %>'
-    let listing = <%- JSON.stringify(listing) %>
-</script>
-<style>
   .show-img {
     width: 100%;
     height: auto;
@@ -178,23 +147,21 @@
           <p class="card-text">&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
           <p class="card-text"><%= listing.location %></p>
           <p class="card-text"><%= listing.country %></p>
-        <% if (!(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id))) { %>
-          <button class="btn btn-dark add-btn book-now-btn w-100 mb-3">Book Now</button>
-        <% } %>
+          <button class="book-now-btn">Book Now</button>
         </div>
       </div>
       <%if(currUser && listing.owner && listing.owner._id && listing.owner._id.equals(currUser._id)){%>
-  <div class="row g-2 mb-3">
-    <div class="col-12 col-md-6">
-      <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn w-100">Edit my place</a>
-    </div>
-    <div class="col-12 col-md-6">
-      <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button class="btn btn-dark w-100">Delete my place</button>
-      </form>
-    </div>
-  </div>
-<% } %>
+        <div class="row g-2 mb-3">
+          <div class="col-12 col-md-6">
+            <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn w-100">Edit my place</a>
+          </div>
+          <div class="col-12 col-md-6">
+            <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+              <button class="btn btn-dark w-100">Delete my place</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
       <div>
         <hr>
         <form method="POST" class="needs-validation" novalidate action="/listings/<%= listing._id%>/reviews">
@@ -251,6 +218,39 @@
         <div id="map" class="mb-3 mt-3"></div>
       </div>
     </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="right-sidebar-book">
+        <p>Get 10% off on your first booking</p>
+        <% if(currUser) { %>
+          <form method="POST" action="/listings/<%= listing._id %>/book" style="width:100%;">
+            <button type="submit" class="book-btn">Book Now !</button>
+          </form>
+        <% } else { %>
+          <a href="/signup" class="book-btn">Book Now !</a>
+        <% } %>
+        <div class="countdown-timer" id="countdown-timer">3:00:00 left</div>
+      </div>
+    </div>
   </div>
 </div>
+<script>
+  // Countdown timer for 3 hours
+  const timerElement = document.getElementById('countdown-timer');
+  let timeLeft = 3 * 60 * 60; // 3 hours in seconds
+  function updateTimer() {
+    const hours = Math.floor(timeLeft / 3600);
+    const minutes = Math.floor((timeLeft % 3600) / 60);
+    const seconds = timeLeft % 60;
+    timerElement.textContent = `${hours}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} left`;
+    if (timeLeft > 0) {
+      timeLeft--;
+    }
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+<script>
+  let mapToken ='<%= process.env.MAP_TOKEN %>'
+  let listing = <%- JSON.stringify(listing) %>
+</script>
 <script src="/js/map.js"></script>
