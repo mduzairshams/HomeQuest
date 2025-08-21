@@ -1,9 +1,9 @@
 # HomeQuest
 # Project Description:
-# Built a full-stack, responsive Airbnb clone web application that allows users to browse, create, edit, and delete property listings with integrated review functionality. Implemented user authentication and authorization using Passport.js, enabling secure login and signup features. Only listing owners can access edit/delete actions on their own listings and reviews, ensuring controlled access. Utilized Express routing for modular backend logic and connect-flash for displaying dynamic feedback messages. Designed the frontend using HTML, CSS, and JavaScript for a seamless and mobile-friendly user experience.
+Built a full-stack, responsive Airbnb clone web application that allows users to browse, create, edit, and delete property listings with integrated review functionality. Implemented user authentication and authorization using Passport.js, enabling secure login and signup features. Only listing owners can access edit/delete actions on their own listings and reviews, ensuring controlled access. Utilized Express routing for modular backend logic and connect-flash for displaying dynamic feedback messages. Designed the frontend using HTML, CSS, and JavaScript for a seamless and mobile-friendly user experience.
 
 # Technologies:
-# Node.js, Express.js, MongoDB, Mongoose, Passport.js, HTML5, CSS3, JavaScript, Express-Router, Cookie-Parser, Express-Session, Connect-Flash, Method-Override
+Node.js, Express.js, MongoDB, Mongoose, Passport.js, HTML5, CSS3, JavaScript, Express-Router, Cookie-Parser, Express-Session, Connect-Flash, Method-Override
 
 <img width="1919" height="909" alt="Screenshot 2025-07-31 195547" src="https://github.com/user-attachments/assets/82166151-1e62-4ae3-9990-b4392b08bc23" />
 <img width="1919" height="894" alt="Screenshot 2025-07-31 195712" src="https://github.com/user-attachments/assets/77fdf138-afaa-4746-88e4-cc1f6f6d5561" />
