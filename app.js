@@ -78,6 +78,14 @@ app.get('/', (req, res) => {
 //     res.send("Root route / is working and server is listening at port 8080")
 // })
 
+// Initialize default res.locals to prevent ReferenceErrors in error views
+app.use((req, res, next) => {
+    res.locals.success = "";
+    res.locals.error = "";
+    res.locals.currUser = null;
+    next();
+});
+
 app.use(cookieParser())
 app.use(session(sessionOptions))
 app.use(flash())
