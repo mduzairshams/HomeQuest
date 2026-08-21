@@ -3,7 +3,7 @@ if(process.env.NODE_ENV != "production"){
 }
 const express = require("express")
 const app = express()
-let port = 8080
+const port = process.env.PORT || 8080;
 const path = require("path")
 const methodOverride = require("method-override")
 const mongoose = require("mongoose")
@@ -51,7 +51,7 @@ const store = MongoStore.create({
     touchAfter: 24 * 3600
 })
 
-store.on("error", () => {
+store.on("error", (err) => {
     console.log("SOME ERROR OCCURED IN MONGO SESSION STORE in app.js ", err)
 })
 
